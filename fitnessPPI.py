@@ -177,6 +177,8 @@ def fitness2(individual, R=0.5):
 ##############################################################################
 
 if __name__ == '__main__':
-    lmiRNA = listaMiRNA()
-    for m in lmiRNA:
-        ff[m] = fitness(m)
+    #lmiRNA = listamiRNA
+    # for m in lmiRNA:
+    #     ff[m] = fitness(m)
+    pass
+    
