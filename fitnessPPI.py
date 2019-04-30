@@ -172,6 +172,172 @@ def fitness2(individual, R=0.5):
 
     return out,
 
+##############################################################################
+##############################################################################
+##############################################################################
+##############################################################################
+##############################################################################
+### ==========================================================================
+###  NUOVE FUNZIONI ==========================================================
+### ==========================================================================
+##############################################################################
+##############################################################################
+##############################################################################
+##############################################################################
+##############################################################################
+
+# struttura di l_miRNA 
+    
+    # la prima lista indica la copertura sulle proteine deregolate
+    # il secondo numero indica il peso.
+    #
+    # l_miRNA = [
+    #     [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0],
+    #     [[0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 1],
+    #     [[0, 0, 0, 0, 0, 0, 0, 0, 1, 0], 2],
+    #     [[0, 0, 0, 0, 0, 0, 0, 0, 1, 1], 3],
+    #     [[0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 4],
+    #     [[0, 0, 0, 0, 0, 0, 0, 1, 0, 1], 5],
+    #     [[0, 0, 0, 0, 0, 0, 0, 1, 1, 0], 6],
+    #     [[0, 0, 0, 0, 0, 0, 0, 1, 1, 1], 7],
+    #     [[0, 0, 0, 0, 0, 0, 1, 0, 0, 0], 8],
+    #     [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1], 9],
+    #     [[0, 0, 0, 0, 0, 0, 1, 0, 1, 0], 10],
+    # ]
+
+
+
+def num_proteine_coperte(individual, l_miRNA):
+    """
+    Data la popolazione descritta in individual, 
+    calcola il numero di proteine coperte
+
+        :param individual: vettore di zero e 1 di lunghezza 
+                            pari al numero totale di miRNA
+        :param l_miRNA: lista di strutture con la copertura
+                    sulle proteine ed il peso
+    """
+    # crea un vettore per memorizzare la copertua delle proteine
+    ss=np.zeros(len(l_miRNA[0][0],))
+
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            ss = np.add(ss, l_miRNA[ii][0])
+    valore = np.count_nonzero(ss)
+
+    return valore
+
+#--------------------------------------------------------------------------
+def num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K):
+    """
+    Data la popolazione descritta in individual, 
+    calcola il numero di proteine coperte piu' di K volte
+
+        :param individual: vettore di zero e 1 di lunghezza 
+                            pari al numero totale di miRNA
+        :param l_miRNA: lista di strutture con la copertura
+                    sulle proteine ed il peso
+    """
+    # crea un vettore per memorizzare la copertua delle proteine
+    ss=np.zeros(len(l_miRNA[0][0],))
+
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            ss = np.add(ss, l_miRNA[ii][0])
+
+    valore = (ss > K).sum()
+
+    return valore
+
+
+#--------------------------------------------------------------------------
+def peso_totale_soluzione(individual, l_miRNA):
+    """
+    Calcola il peso totale della soluzione
+    """
+    peso_totale = 0
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            peso_totale += l_miRNA[ii][1]
+    return peso_totale
+
+
+
+#--------------------------------------------------------------------------
+def num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, K):
+    """
+        Data la popolazione descritta in individual, 
+        calcola il numero di miRNA 
+        che coprono piu' di K proteine
+
+        :param individual: vettore di zero e 1 
+                            di lunghezza pari al numero totale di miRNA
+        :param l_miRNA: lista di strutture con la copertura
+                    sulle proteine ed il peso
+
+        :param K : desiderato numero di 
+                    proteine coperte dal singolo miRNA
+    """
+    totale = 0
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            kk = np.sum(l_miRNA[ii][0])
+            if kk > K:
+                totale += 1
+    
+    return totale
+
+
+#--------------------------------------------------------------------------
+def num_miRNA_di_peso_minore_a_K(individual, l_miRNA, K):
+    """
+        Data la popolazione descritta in individual, 
+        calcola il numero di miRNA di peso inferiore a K
+
+        :param individual: vettore di zero e 1 
+                            di lunghezza pari al numero totale di miRNA
+        :param l_miRNA: lista di strutture con la copertura
+                    sulle proteine ed il peso
+
+        :param K : peso massimo dei miRNA
+    """
+    totale = 0
+    for ii in range(len(individual)):
+        if individual[ii] > 0 and l_miRNA[ii][1] < K:
+            totale += 1 
+    return totale
+
+
+#--------------------------------------------------------------------------
+def obiettivo2(individual, l_miRNA):
+    """
+    Calcola il punteggio della soluzione
+
+    :param individual: vettore di zero e 1 di lunghezza eguale al numero totale di miRNA
+    :param l_miRNA: lista di strutture con la copertura
+                    sulle proteine ed il peso
+
+    :return:    valore - indica il numero di proteine coperte dalla soluzione
+                peso - indica il numero di proteine non deregolate imapttate
+                        dalla soluzione
+                svantaggio_ss - indica il numero di proteine coperte piu' volte
+                                dalla soluzione
+    """
+    valore =  num_proteine_coperte(individual, l_miRNA)
+    peso =  peso_totale_soluzione(individual, l_miRNA)
+    svantaggio_ss = num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K=1)
+
+    return valore, peso, svantaggio_ss
+
+
+
+
+
+
+
+
+
+
 
 
 ##############################################################################
@@ -181,4 +347,3 @@ if __name__ == '__main__':
     # for m in lmiRNA:
     #     ff[m] = fitness(m)
     pass
-    
