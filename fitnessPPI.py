@@ -246,14 +246,12 @@ def num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K):
 
 
 #--------------------------------------------------------------------------
-def peso_totale_soluzione(individual, l_miRNA):
+def peso_totale_soluzione(individual):
     """
     Calcola il peso totale della soluzione
     """
-    peso_totale = 0
-    for ii in range(len(individual)):
-        if individual[ii] > 0:
-            peso_totale += l_miRNA[ii][1]
+    D_T, ND_T = fitness_L0(individual)
+    peso_totale = sum(ND_T)
     return peso_totale
 
 
