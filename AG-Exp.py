@@ -78,7 +78,7 @@ def main(filePar):
 
     # carica i valori da passare ai programmi
     with open(filePar, 'r') as ymlfile:
-        cfg = yaml.load(ymlfile)
+        cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
         NGEN = cfg["parAG"]["NGEN"]
         POPOLAZIONE_INIZIALE = cfg["parAG"]["POPOLAZIONE_INIZIALE"]
