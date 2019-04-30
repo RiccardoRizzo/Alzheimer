@@ -1,3 +1,7 @@
 # FILE DA IGNORARE
 
 Test_*
+
+# DIRECTORY DA IGNORARE
+
+__pycache__/
