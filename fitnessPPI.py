@@ -14,8 +14,8 @@ D = []              # lista proteine deregolate
 ND = []             # lista proteine non deregolate
 df=pd.DataFrame()   # dataframe della struttura miRNA -PPI
 
-static_hit = {}     # dictionary con l'elenco delle proteine taret dei miRNA
-                    #   static_hit[miRNA] = [ [listaND], [listaD]]
+static_hit = {}     # dictionary con l'elenco delle proteine target dei miRNA
+                    #   static_hit[miRNA] = [ [listaND], [listaD] ]
 
 ff2 = {}            # contributo di secondo livello. Per ogni miRNA si calcolano
                     # tutte le proteine collegate alle proteine target,
@@ -23,7 +23,7 @@ ff2 = {}            # contributo di secondo livello. Per ogni miRNA si calcolano
                     # A : prot. non dereg. collegate alle prot. target non dereg
                     # B : prot. non dereg. collegate alle prot. target dereg
                     # C : prot. dereg. collegate alle prot. target non dereg
-                    # E: prot.  dereg. collegate alle prot. target  dereg
+                    # E : prot. dereg. collegate alle prot. target  dereg
 
 listamiRNA = []     # lista dei miRNA nel problema
 ########################################################################
@@ -178,7 +178,7 @@ def fitness2(individual, R=0.5):
 ##############################################################################
 ##############################################################################
 ### ==========================================================================
-###  NUOVE FUNZIONI ==========================================================
+###  NUOVE FUNZIONI OBIETTIVO ================================================
 ### ==========================================================================
 ##############################################################################
 ##############################################################################
@@ -202,12 +202,13 @@ def fitness2(individual, R=0.5):
     #     [[0, 0, 0, 0, 0, 0, 0, 1, 1, 1], 7],
     #     [[0, 0, 0, 0, 0, 0, 1, 0, 0, 0], 8],
     #     [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1], 9],
-    #     [[0, 0, 0, 0, 0, 0, 1, 0, 1, 0], 10],
+    #     [[0, 0, 0, 0, 0, 0, 1, 0, 1, 0], 10]
     # ]
 
 
 
-def num_proteine_coperte(individual, l_miRNA):
+
+def num_proteine_coperte(individual):
     """
     Data la popolazione descritta in individual, 
     calcola il numero di proteine coperte
@@ -217,14 +218,8 @@ def num_proteine_coperte(individual, l_miRNA):
         :param l_miRNA: lista di strutture con la copertura
                     sulle proteine ed il peso
     """
-    # crea un vettore per memorizzare la copertua delle proteine
-    ss=np.zeros(len(l_miRNA[0][0],))
-
-    for ii in range(len(individual)):
-        if individual[ii] > 0:
-            ss = np.add(ss, l_miRNA[ii][0])
-    valore = np.count_nonzero(ss)
-
+    D_T, ND_T = fitness_L0(individual)
+    valore = len(D_T)
     return valore
 
 #--------------------------------------------------------------------------
@@ -339,11 +334,41 @@ def obiettivo2(individual, l_miRNA):
 
 
 
-
+##############################################################################
+## MAIN  #####################################################################
 ##############################################################################
 
 if __name__ == '__main__':
     #lmiRNA = listamiRNA
     # for m in lmiRNA:
     #     ff[m] = fitness(m)
-    pass
+    
+    #####################################################################
+    #####################################################################
+    ####### COLLAUDO DELLA FITNESS MODULARE
+    ####################################################################
+
+    
+    l_miRNA = [
+        [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0],
+        [[0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 1],
+        [[0, 0, 0, 0, 0, 0, 0, 0, 1, 0], 2],
+        [[0, 0, 0, 0, 0, 0, 0, 0, 1, 1], 3],
+        [[0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 4],
+        [[0, 0, 0, 0, 0, 0, 0, 1, 0, 1], 5],
+        [[0, 0, 0, 0, 0, 0, 0, 1, 1, 0], 6],
+        [[0, 0, 0, 0, 0, 0, 0, 1, 1, 1], 7],
+        [[0, 0, 0, 0, 0, 0, 1, 0, 0, 0], 8],
+        [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1], 9],
+        [[0, 0, 0, 0, 0, 0, 1, 0, 1, 0], 10],
+    ]
+
+    individual = [1,1,1,0,0,0,0,0,0,0,1]
+
+
+    print("num_proteine_coperte=", num_proteine_coperte(individual, l_miRNA))
+    print("num_proteine_coperte_piu_di_K_volte=", num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, 1))
+    print("peso_totale_soluzione=", peso_totale_soluzione(individual, l_miRNA))
+    print("num_miRNA_coprenti_piu_di_K_prot=", num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, 1))
+    print("num_miRNA_di_peso_minore_a_K=", num_miRNA_di_peso_minore_a_K(individual, l_miRNA, 3))
+    print("obiettivo2=", obiettivo2(individual, l_miRNA))
