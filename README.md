@@ -1,4 +1,4 @@
 # Alzheimer
 Algoritmo genetico selezione proteine
 
-Questo e' l'edit fatto
+Si tratta del "Branch1" del progetto.

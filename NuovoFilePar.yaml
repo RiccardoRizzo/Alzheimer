@@ -1,0 +1,34 @@
+
+
+# i pesi di ottimizzazione sono (-1.0,)
+
+# Le funzioni di fitness sono definita nel file
+# fitnessPPI che deve essere importato nel programma principale
+# A seguire si definiscono:
+#   FUNZIONE_FITNESS  : la funzione di fitness usata
+#   FITNESS_EVAL      : la tupla che definisce quale valore amssimizzare
+#                       e quale minimizzare di quello restituiti
+#                       dalla funzione di fitness
+
+parAG:
+    NGEN: 500
+    POPOLAZIONE_INIZIALE: 40
+    TOURNMENT_SIZE: 5
+
+    PROB_MUTAZIONE_SINGOLO_BIT: 0.05
+    PROB_MATING: 0.5
+    PROB_MUTAZIONE_INDIVIDUO: 0.2
+
+    NUM_RIPETIZIONI : 40
+
+    FUNZIONE_FITNESS : "fitness2_1"
+    FITNESS_EVAL : !!python/tuple [1.0, -1.0]
+
+# output:
+#  OUTPUT_FILENAME: "fileExp.yaml"
+
+
+
+input:
+  NFILE_MIRNA_VS_PROT: "../materiale Fiannaca/matriciazza_sempl_GC.csv"
+  NFILE_PROT_DEREG: "../materiale Fiannaca/proteins_classes_GC.csv"
