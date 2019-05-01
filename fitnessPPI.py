@@ -265,7 +265,7 @@ def num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, K):
     """
         Data la popolazione descritta in individual, 
         calcola il numero di miRNA 
-        che coprono piu' di K proteine
+        che coprono piu' di K proteine deregolate
 
         :param individual: vettore di zero e 1 
                             di lunghezza pari al numero totale di miRNA
@@ -308,7 +308,7 @@ def num_miRNA_di_peso_minore_a_K(individual, l_miRNA, K):
 
 
 #--------------------------------------------------------------------------
-def obiettivo2(individual, l_miRNA):
+def obiettivo2(individual):
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # TODO:correggere usando quello che c'e'
     """
@@ -324,9 +324,9 @@ def obiettivo2(individual, l_miRNA):
                 svantaggio_ss - indica il numero di proteine coperte piu' volte
                                 dalla soluzione
     """
-    valore =  num_proteine_coperte(individual, l_miRNA)
-    peso =  peso_totale_soluzione(individual, l_miRNA)
-    svantaggio_ss = num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K=1)
+    valore =  num_proteine_coperte(individual)
+    peso =  peso_totale_soluzione(individual)
+    # svantaggio_ss = num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K=1)
 
     return valore, peso, svantaggio_ss
 
