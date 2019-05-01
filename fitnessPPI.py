@@ -218,7 +218,7 @@ def num_proteine_coperte(individual):
         :param l_miRNA: lista di strutture con la copertura
                     sulle proteine ed il peso
     """
-    D_T, ND_T = fitness_L0(individual)
+    D_T, ND_T = listaProtTarget(individual)
     valore = len(D_T)
     return valore
 
@@ -252,7 +252,7 @@ def peso_totale_soluzione(individual):
     """
     Calcola il peso totale della soluzione
     """
-    D_T, ND_T = fitness_L0(individual)
+    D_T, ND_T = listaProtTarget(individual)
     peso_totale = sum(ND_T)
     return peso_totale
 
