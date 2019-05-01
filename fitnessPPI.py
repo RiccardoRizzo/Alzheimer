@@ -253,7 +253,7 @@ def peso_totale_soluzione(individual):
     Calcola il peso totale della soluzione
     """
     D_T, ND_T = listaProtTarget(individual)
-    peso_totale = sum(ND_T)
+    peso_totale = len(ND_T)
     return peso_totale
 
 
