@@ -328,7 +328,8 @@ def obiettivo2(individual):
     peso =  peso_totale_soluzione(individual)
     # svantaggio_ss = num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K=1)
 
-    return valore, peso, svantaggio_ss
+    #return valore, peso, svantaggio_ss
+    return valore, peso
 
 
 
