@@ -224,6 +224,8 @@ def num_proteine_coperte(individual):
 
 #--------------------------------------------------------------------------
 def num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K):
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    # TODO:correggere usando quello che c'e'
     """
     Data la popolazione descritta in individual, 
     calcola il numero di proteine coperte piu' di K volte
@@ -258,6 +260,8 @@ def peso_totale_soluzione(individual):
 
 #--------------------------------------------------------------------------
 def num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, K):
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    # TODO:correggere usando quello che c'e'
     """
         Data la popolazione descritta in individual, 
         calcola il numero di miRNA 
@@ -283,6 +287,8 @@ def num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, K):
 
 #--------------------------------------------------------------------------
 def num_miRNA_di_peso_minore_a_K(individual, l_miRNA, K):
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    # TODO:correggere usando quello che c'e'
     """
         Data la popolazione descritta in individual, 
         calcola il numero di miRNA di peso inferiore a K
@@ -303,6 +309,8 @@ def num_miRNA_di_peso_minore_a_K(individual, l_miRNA, K):
 
 #--------------------------------------------------------------------------
 def obiettivo2(individual, l_miRNA):
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    # TODO:correggere usando quello che c'e'
     """
     Calcola il punteggio della soluzione
 
