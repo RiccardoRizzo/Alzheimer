@@ -256,7 +256,7 @@ def peso_totale_soluzione(individual):
     for ii in range(len(individual)):
         if individual[ii] > 0:
             ND, D = static_hit[listamiRNA[ii]]
-            peso += len(D)
+            peso += len(ND)
     return peso
 
 
