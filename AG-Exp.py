@@ -124,7 +124,7 @@ def main(filePar):
     DIM_INDIVIDUO = len(l_miRNA_totale)
 
     #OUTPUT_FILENAME = cfg["output"]["OUTPUT_FILENAME"]
-    # al momento l'output e' scrutto in coda al file parametri
+    # al momento l'output e' scritto in coda al file parametri
     OUTPUT_FILENAME = filePar
 
     #
@@ -150,17 +150,13 @@ def main(filePar):
     # il fitness adesso ha due elementi: massimizzare l'impatto sulle deregolate
     # minimizzare l'impatto sulle non deregolate
     #creator.create("FitnessMax", base.Fitness, weights=(1.0,-1.0))
+    
     creator.create("FitnessMax", base.Fitness, weights=fitness_eval)
-
-
     creator.create("Individual", np.ndarray, fitness=creator.FitnessMax)
 
     toolbox = base.Toolbox()
-
     toolbox.register("attr_bool", random.randint, 0, 1)
-
-    toolbox.register("individual", tools.initRepeat, creator.Individual,
-                     toolbox.attr_bool, n=DIM_INDIVIDUO)
+    toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, n=DIM_INDIVIDUO)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
     ### DEFINIZIONE DELLA FUNZONE DI FITNESS -----------------------------------
