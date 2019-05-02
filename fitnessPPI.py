@@ -252,9 +252,12 @@ def peso_totale_soluzione(individual):
     """
     Calcola il peso totale della soluzione
     """
-    D_T, ND_T = listaProtTarget(individual)
-    peso_totale = len(ND_T)
-    return peso_totale
+    peso = 0
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            ND, D = static_hit[listamiRNA[ii]]
+            peso += len(D)
+    return peso
 
 
 
