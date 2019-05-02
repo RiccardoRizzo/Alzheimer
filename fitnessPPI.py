@@ -235,7 +235,7 @@ def num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K):
         :param l_miRNA: lista di strutture con la copertura
                     sulle proteine ed il peso
     """
-    # crea un vettore per memorizzare la copertua delle proteine
+    # crea un vettore per memorizzare la copertura delle proteine
     ss=np.zeros(len(l_miRNA[0][0],))
 
     for ii in range(len(individual)):
@@ -259,7 +259,13 @@ def peso_totale_soluzione(individual):
             peso += len(ND)
     return peso
 
-
+#--------------------------------------------------------------------------
+def numero_miRNA_soluzione(individual):
+    lun = 0
+    for ii in range(len(individual)):
+        if individual[ii] > 0:
+            lun += 1
+    return lun
 
 #--------------------------------------------------------------------------
 def num_miRNA_coprenti_piu_di_K_prot(individual, l_miRNA, K):
@@ -329,10 +335,15 @@ def obiettivo2(individual):
     """
     valore =  num_proteine_coperte(individual)
     peso =  peso_totale_soluzione(individual)
+    
+    lun = numero_miRNA_soluzione(individual)
+    if lun > 10:
+        valore = -50
+        peso = 10000
     # svantaggio_ss = num_proteine_coperte_piu_di_K_volte(individual, l_miRNA, K=1)
 
     #return valore, peso, svantaggio_ss
-    return valore, peso
+    return valore, peso, lun
 
 
 
